@@ -5,8 +5,8 @@ from hex_gtm.model import HexGTM
 from hex_gtm.hex_rules import X, O
 
 if __name__ == "__main__":
-    N = 7
-    data = make_dataset(n=N, games=3000, seed=42)
+    N = 10
+    data = make_dataset(n=N, games=50000, seed=42)
 
     # train/test split
     rng = np.random.default_rng(0)
@@ -25,8 +25,6 @@ if __name__ == "__main__":
         correct += int(pred == y)
     print(f"Test acc: {correct/len(test):.3f}")
 
-    # save via pickle (GraphTM objects are Python-level)
-    import pickle
-    with open("hex_gtm_model.pkl", "wb") as f:
-        pickle.dump(model, f)
-    print("Saved model to hex_gtm_model.pkl")
+    #saving
+    model.save("hex_gtm_model")
+    print("Saved model to ./hex_gtm_model")
